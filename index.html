@@ -410,6 +410,9 @@
       }
 
       .decade-selector {
+        white-space: nowrap;   /* Prevents text wrapping */
+        display: inline-block; /* Ensures button respects width */
+        min-width: 200px;      /* Adjust to fit your longest text */
         bottom: 100px;
         gap: 10px;
         padding: 5px 11px;
