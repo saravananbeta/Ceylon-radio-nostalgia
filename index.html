@@ -806,7 +806,8 @@ document.addEventListener('DOMContentLoaded', function() {
       } else if (event.data === YT.PlayerState.PAUSED) {
         btn.innerText = '▶';
       } else if (event.data === YT.PlayerState.ENDED) {
-        currentIndex = Math.floor(Math.random() * playlist.length);
+        //currentIndex = Math.floor(Math.random() * playlist.length);
+        nextTrack();
       }
     }
 
