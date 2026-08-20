@@ -135,6 +135,12 @@
   box-shadow: none !important;
 }
 
+ /* Force Play button to stay dark while playing, even on mobile touch */
+#playBtn:not(.is-paused) {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}   
+
 /* Desktop-only hover (Will NOT trigger on touchscreens) */
 @media (hover: hover) and (pointer: fine) {
   .controls button:hover {
@@ -616,22 +622,13 @@ document.addEventListener('click', function unmuteOnFirstClick(e) {
 
 // Dedicated Mute/Unmute Button Handler
 document.addEventListener('DOMContentLoaded', function() {
-  const muteBtn = document.getElementById('muteBtn');
-  if (muteBtn) {
-    muteBtn.addEventListener('click', function() {
-      isAudioMuted = !isAudioMuted;
-
-      if (ytPlayer && typeof ytPlayer.unMute === 'function') {
-        if (isAudioMuted) {
-          ytPlayer.mute();
-        } else {
-          ytPlayer.unMute();
-          ytPlayer.setVolume(100);
-        }
-      }
-      updateMuteUI();
+  const buttons = document.querySelectorAll('.controls button');
+  buttons.forEach(function(btn) {
+    btn.addEventListener('touchend', function() {
+      // Strip touch focus immediately to prevent lingering hover states on mobile
+      setTimeout(() => btn.blur(), 50);
     });
-  }
+  });
 });
 
 // Sync icon strictly based on state variable
