@@ -722,6 +722,21 @@ function flashButton(btn) {
       renderTrackChange();
     }
 
+    
+    function randomNextTrack() {
+  const range = getCurrentRange();
+
+  let newIndex;
+
+  do {
+    newIndex = getRandomTrackIndex();
+  } while (newIndex === currentIndex && range.start !== range.end);
+
+  currentIndex = newIndex;
+
+  renderTrackChange();
+}
+    
     function prevTrack(e) {
       if (e && e.preventDefault) e.preventDefault();
 
@@ -808,13 +823,13 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.innerText = '▶';
       } else if (event.data === YT.PlayerState.ENDED) {
         //currentIndex = getRandomTrackIndex();  //Choose a random track when a song ends
-        nextTrack();
+        randomNextTrack();
       }
     }
 
     function onPlayerError(event) {
       console.warn(`Track ${currentIndex + 1} is unplayable. Skipping...`);
-      nextTrack();
+      randomNextTrack();
     }
   </script>
 </body>
