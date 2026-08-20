@@ -713,8 +713,8 @@ function flashButton(btn) {
 
       const range = getCurrentRange();
 
-      //currentIndex++;
-       currentIndex = Math.floor(Math.random() * playlist.length);
+      currentIndex++;
+       
       if (currentIndex > range.end) {
         currentIndex = range.start;
       }
