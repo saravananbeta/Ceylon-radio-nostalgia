@@ -581,34 +581,31 @@
     let ytPlayer;
     let isAudioMuted = true; // State tracker
 
+// Updated to make player load the song - unmute, pause and wait for the user to click Play.    
 function onYouTubeIframeAPIReady() {
   ytPlayer = new YT.Player('player', {
     height: '1',
     width: '1',
     videoId: playlist[currentIndex],
     playerVars: { 
-      'autoplay': 1,      
-      'mute': 1,          
+      'autoplay': 1,
+      'mute': 1,
       'controls': 0,
       'playsinline': 1
     },
     events: {
       'onReady': function(event) {
-        if (isAudioMuted) {
-          event.target.mute();
-        } else {
-          event.target.unMute();
-          event.target.setVolume(100);
-        }
-        event.target.loadVideoById(playlist[currentIndex]);
-        updateMuteUI(); 
+        event.target.mute();
+        event.target.setVolume(90);
+
+        updateMuteUI();
         updateUI(event);
       },
       'onStateChange': onPlayerStateChange,
       'onError': onPlayerError
     }
   });
-}
+}    
 
 // Global listener: Unmute on first click anywhere outside the mute button
 document.addEventListener('click', function unmuteOnFirstClick(e) {
@@ -872,22 +869,45 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
-    function onPlayerStateChange(event) {
+let initialLoad = true;  //Player will load  the song, unmute and pause, for the user to click Play.
+function onPlayerStateChange(event) {
   const btn = document.getElementById('playBtn');
-  if (!btn) return;
 
+  // Initial autoplay is only used to force YouTube to load/buffer
+  // the song on mobile. As soon as it starts playing, pause it.
+  if (initialLoad && event.data === YT.PlayerState.PLAYING) {
+    initialLoad = false;
+
+    event.target.pauseVideo();
+    event.target.unMute();
+    event.target.setVolume(100);
+
+    isAudioMuted = false;
+
+    btn.innerText = '▶';
+    btn.classList.add('is-paused');
+
+    updateMuteUI();
+    updateUI(event);
+
+    return;
+  }
+
+  // Normal player operation
   if (event.data === YT.PlayerState.PLAYING) {
     btn.innerText = '⏸';
-    btn.classList.remove('is-paused'); // Returns to default background while playing
+    btn.classList.remove('is-paused');
     fetchTrackTitle();
+
   } else if (event.data === YT.PlayerState.PAUSED) {
     btn.innerText = '▶';
-    btn.classList.add('is-paused');    // Stays yellow while paused
+    btn.classList.add('is-paused');
+
   } else if (event.data === YT.PlayerState.ENDED) {
-    btn.classList.remove('is-paused');
-    advanceToNextTrack();
+    playNextOrRandom();
   }
-}
+}   
+
     function onPlayerError(event) {
       console.warn(`Track ${currentIndex + 1} is unplayable. Skipping...`);
       advanceToNextTrack();
