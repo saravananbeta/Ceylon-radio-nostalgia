@@ -905,7 +905,7 @@ function onPlayerStateChange(event) {
     btn.classList.add('is-paused');
 
   } else if (event.data === YT.PlayerState.ENDED) {
-    playNextOrRandom();
+    advanceToNextTrack();
   }
 }   
 
