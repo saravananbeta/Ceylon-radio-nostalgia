@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ceylon Radio Nostalgia</title>
+  
+  <!-- Cursive Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #000;
+      color: #fff;
+    }
+
+    /* Fullscreen Background Image */ 
+   @media (max-width: 600px) {
+      .bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain !important;
+  object-position: bottom left;
+  z-index: 1;
+  pointer-events: none;
+}
+    }
+
+    /* Cursive Title at Top Left */
+    .app-header {
+      position: fixed;
+      top: 25px;
+      left: 35px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .app-header h1 {
+      font-family: 'Great Vibes', 'Brush Script MT', cursive;
+      font-size: 3.4rem;
+      font-weight: 400;
+      color: #ffb703;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.8);
+      line-height: 1;
+    }
+
+    /* Top Right Container for Clock & Mute Button */
+    .top-right-container {
+      position: fixed;
+      top: 25px;
+      right: 35px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    /* Digital Time Display at Top Right */
+    .time-display {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #ffffff;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+      pointer-events: none;
+    }
+
+    /* Mute Button below Clock */
+    .mute-btn {
+      background: rgba(0, 0, 0, 0.6);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .mute-btn:hover {
+      background: rgba(0, 0, 0, 0.85);
+    }
+
+.controls button {
+  font-variant-emoji: text;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #ffffff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  outline: none !important;
+}
+
+.controls button:focus,
+.controls button:active,
+.controls button:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .controls button:hover {
+    background: #ffb703 !important;
+    color: #000000 !important;
+  }
+}
+
+.controls button.is-pressed {
+  background: #ffb703 !important;
+  color: #000000 !important;
+}
+
+.controls button.is-active {
+  background: #ffb703 !important;
+  color: #000000 !important;
+}
+
+  #playBtn.is-paused {
+  background: #ffb703 !important;
+  color: #000000 !important;
+}
+
+    /* Minimalist Player Bar Overlay */
+.player-bar {
+  position: fixed;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 28px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transform-origin: bottom center;
+}
+
+.track-info {
+  max-width: 220px;
+  font-size: 1rem;
+}
+
+.volume-container input[type="range"] {
+  width: 80px;
+}
+
+    .thumb {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid #ffb703;
+      flex-shrink: 0;
+    }
+
+    .thumb {      
+  animation: slowRotate 8s linear infinite;
+  animation-play-state: paused;
+  }
+
+  .thumb.is-playing {
+  animation-play-state: running;
+ }   
+
+  @keyframes slowRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+    
+    .track-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 240px;
+      overflow: hidden;
+    }
+
+    .track-title {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.2;
+    }
+
+    .track-sub {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.68rem;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      margin-top: 2px;
+    }
+
+    .track-input {
+      width: 32px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 4px;
+      color: #ffb703;
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-align: center;
+      outline: none;
+      padding: 0 2px;
+      transition: all 0.2s ease;
+    }
+
+    .track-input:focus {
+      border-color: #ffb703;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .track-input::-webkit-outer-spin-button,
+    .track-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .track-input[type=number] {
+      -moz-appearance: textfield;
+    }
+ 
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .controls button {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+
+    .controls button:hover {
+      background: #ffb703;
+      color: #000;
+    }
+
+    .volume-container {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      margin-left: 2px;
+      flex-shrink: 0;
+    }
+
+    .volume-container input[type="range"] {
+      width: 60px;
+      accent-color: #ffb703;
+      cursor: pointer;
+    }
+    
+  .yt-links {
+  position: fixed;
+  bottom: 25px;
+  left: 35px;
+  z-index: 100;
+  display: flex;
+  gap: 18px;
+ }
+
+ .yt-link-text {
+  color: #ffb703;
+  text-decoration: underline;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+  transition: color 0.2s ease;
+  }
+
+    .yt-link-text:hover {
+      color: #ffffff;
+    }
+
+    .audio-engine {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 1px;
+      height: 1px;
+      opacity: 0.01;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .decade-selector {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 6px 14px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 30px;
+    }
+
+    .decade-selector label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #fff;
+      font-size: 0.8rem;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .decade-selector input[type="radio"] {
+      accent-color: #ffb703;
+      cursor: pointer;
+    }
+
+    .listener-count {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+  pointer-events: none;
+  }
+
+  /* --- SLEEP TIMER STYLES --- */
+  /* Updated Sleep Timer Button inside Decade Bar */
+  #sleepBtn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    margin-left: 6px;
+  }
+
+  #sleepBtn:hover {
+    color: #ffb703;
+  }
+
+  #sleepModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #sleepModal.show { 
+    display: flex; 
+  }
+
+  .sleep-box {
+    background: rgba(18, 16, 15, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 22px 18px 14px;
+    border-radius: 20px;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+  }
+
+  .sleep-box-title {
+    color: #8e8a85;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .timer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 14px;
+  }
+
+  .timer-grid button {
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .timer-grid button:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: #ffb703;
+  }
+
+  .timer-grid button.full-width {
+    grid-column: span 2;
+  }
+
+  .cancel-btn {
+    background: none;
+    border: none;
+    color: #a0a0a0;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 6px;
+    transition: color 0.2s ease;
+  }
+
+  .cancel-btn:hover { 
+    color: #ffffff; 
+  }
+
+    @media (max-width: 600px) {
+      .bg-image {
+        object-fit: contain !important;
+        object-position: center center !important;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .app-header {
+        top: 15px;
+        left: 10px;
+      }
+
+      .app-header h1 {
+        font-size: 2.2rem;
+      }
+
+      .top-right-container {
+        top: 55px;
+        left: 20px;
+        right: auto;
+      }
+
+      .time-display {
+        font-size: 0.85rem;
+      }
+
+    .yt-links {
+  bottom: 12px;
+  left: 20px !important;
+  right: auto !important;
+  transform: none !important;
+  gap: 14px;
+  white-space: nowrap;
+  }
+
+      .player-bar {
+        bottom: 45px;
+        gap: 8px;
+        padding: 6px 12px;
+        max-width: 95vw;
+      }
+
+      .track-info {
+        max-width: 100px;
+      }
+
+      .volume-container input[type="range"] {
+        width: 45px;
+      }
+
+      .decade-selector {
+        white-space: nowrap;
+        min-width: 170px;
+        bottom: 100px;
+        gap: 10px;
+        padding: 5px 11px;
+      }
+
+      .decade-selector label {
+        font-size: 0.75rem;
+      }
+    }  
+  </style>
+</head>
+<body>
+
+<picture>
+  <source media="(max-width: 600px)" srcset="Terrace_boy_mobile.jpg" />
+  <img src="Terrace_boy_crop.jpg" alt="Background" class="bg-image" />
+</picture>
+
+  <!-- Cursive Title at Top Left -->
+  <header class="app-header">
+    <h1>Ceylon Radio Nostalgia</h1>
+  </header>
+
+  <!-- Digital Time Display & Mute Button at Top Right -->
+  <div class="top-right-container">
+    <div id="clockDisplay" class="time-display">00:00</div>
+    <div id="listenerCount" class="listener-count">Online: --</div>
+    <button id="muteBtn" class="mute-btn" aria-label="Toggle Sound">
+      <span id="muteIcon">🔇</span>
+    </button>
+  </div>
+
+  <!-- Decade Selector -->
+  <div class="decade-selector" role="radiogroup" aria-label="Music decade">
+  <label>
+    <input type="radio" name="decade" value="80s" checked onchange="changeDecade('80s')" />
+    <span>1980s</span>
+  </label>
+  <label>
+    <input type="radio" name="decade" value="70s" onchange="changeDecade('70s')" />
+    <span>1970s</span>
+  </label>
+  <button id="sleepBtn" onclick="openSleep()">🌙 Sleep timer</button>
+ </div>
+
+  <!-- Minimalist Radio Player (Centered at Bottom) -->
+  <div class="player-bar">
+    <img id="trackThumb" src="" alt="Thumb" class="thumb" />
+    
+    <div class="track-info">
+      <span id="trackTitle" class="track-title" title="Track Title">Loading Title...</span>
+      <div class="track-sub">
+        <input 
+          type="number" 
+          id="trackInput" 
+          class="track-input" 
+          min="1" 
+          max="26" 
+          value="1" 
+          onchange="jumpToTrack(this.value)"
+          onkeydown="if(event.key==='Enter') this.blur()"
+        />
+        <span id="trackTotal">/26</span>
+      </div>
+    </div>
+
+  <div class="controls">
+  <button id="shuffleBtn" onclick="toggleShuffle()" title="Shuffle">&#x1F500;</button> 
+  <button id="playBtn" onclick="togglePlay()" title="Play/Pause">▶</button>
+  <button onclick="nextTrack(event)" title="Next">▶▶</button>
+  </div>
+
+    <div class="volume-container">
+      <span>🔊</span>
+      <input type="range" id="volumeSlider" min="0" max="100" value="80" oninput="setVolume(this.value)" />
+    </div>
+  </div>
+
+  <!-- Sleep Timer Button Trigger -->
+  <button id="sleepBtn" onclick="openSleep()">🌙 Sleep timer</button>
+
+  <!-- Sleep Timer Modal Popup -->
+  <div id="sleepModal" onclick="if(event.target==this)closeSleep()">
+    <div class="sleep-box">
+      <div class="sleep-box-title">Stops Playback After</div>
+      <div class="timer-grid">
+        /* <button onclick="setSleep(1)">1 min</button>  */
+        <button onclick="setSleep(30)">30 min</button>
+        <button onclick="setSleep(45)">45 min</button>
+        <button onclick="setSleep(60)" class="full-width">60 min</button>
+      </div>
+      <button class="cancel-btn" onclick="setSleep(0)">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Underlined Text Link at Bottom Right Corner -->
+  <div class="yt-links">
+    <a href="https://music.youtube.com/playlist?list=RDCLAK5uy_mwRfUnwOArvFK6xjndDc7W-xxepqndu5M" target="_blank" class="yt-link-text" rel="noopener noreferrer">YT Music Playlist 70s</a>
+    <a href="https://music.youtube.com/playlist?list=RDCLAK5uy_l8e6bzL0QsaOnR0ahnjIgQm9eva2D8J8U" target="_blank" class="yt-link-text" rel="noopener noreferrer">YT Music Playlist 80s</a>
+  </div>
+
+  <!-- Offscreen YouTube Iframe Engine for Audio Only -->
+  <div id="player" class="audio-engine"></div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    /* Digital Clock Logic */
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('clockDisplay').innerText = `${hours}:${minutes}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    /* Sleep Timer Logic */
+    let sleepTimer = null, sleepRemain = 0;
+
+    function openSleep() { 
+      document.getElementById('sleepModal').classList.add('show'); 
+    }
+
+    function closeSleep() { 
+      document.getElementById('sleepModal').classList.remove('show'); 
+    }
+
+    function setSleep(mins) {
+      closeSleep();
+      if (sleepTimer) clearInterval(sleepTimer);
+      
+      const btn = document.getElementById('sleepBtn');
+      
+      if (mins === 0) { 
+        btn.innerHTML = '🌙 Sleep timer'; 
+        return; 
+      }
+      
+      sleepRemain = mins * 60;
+      btn.innerHTML = `🌙 ${mins}:00`;
+      
+      sleepTimer = setInterval(() => {
+        sleepRemain--;
+        let m = Math.floor(sleepRemain / 60);
+        let s = sleepRemain % 60;
+        btn.innerHTML = `🌙 ${m}:${String(s).padStart(2, '0')}`;
+        
+        if (sleepRemain <= 0) {
+          clearInterval(sleepTimer);
+          if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
+            ytPlayer.pauseVideo();
+          }
+          btn.innerHTML = '🌙 Sleep timer';
+        }
+      }, 1000);
+    }
+
+    /* Playlist Data & Audio Logic */
+    const playlist1 = [
+      "1a_G6_3VXjc", "iVLaWnpAoB0", "xYnPknPmz_A", "G5bCu3X93hs", "xtAoBpump3Y", "O6gLltIk53c", "pvIPv4N_YGE", "ETMZa9jb6kU",
+      "0gAJpX6wfPQ", "yupbbWm2tbE", "belw38b7EoQ", "VK3KlGTdIQc", "G9mbXxvOWFo", "rejlq5WO1AM", "q4ZGIG6R17M", "x9LHt9wGeIU",
+      "00Rucseox0U", "HjBAZf7li5A", "FxvPEVLFMIk", "_zsC7VJm2Rs", "8Fa07Te-KYQ", "zYnW9qbrsnw", "XMvpKwt6jZ0", "V4eVAyVtR6k",
+      "N15ET23CpLQ", "HdR2JeybsBU", "MRjJQtL50Ls", "tpa7cQWW57U", "VhIfjUDQAJM", "iunDOL6-TFo", "JBvvNLS2A6I", "s_4HQnCki4o",
+      "ypnelqs0SwQ", "Z5htrnxKGBM"
+    ];
+
+    const playlist2 = [
+      "jS_7UMAXO18", "JbGYHXVwAjY", "Sx8TkOp-vhA", "HKt5_bqNiF4", "Nsv4VPy1t0M", "8dSCb_4sAIQ", "B7V5QOqpWAg", "1bCluVw0-70", 
+      "pRfoA6aIFp4", "0Jydo3srxUg", "TlwCWjs3YOg", "JrDtf4XcnIk", "lyKDKp6kvlU", "OXcxtsfP8Ko", "X5xgvkleCVY", "amrYH0MLNpc", 
+      "MoRV_104F88", "q9295zePSH4", "LdcFkET5McQ", "_o0XDL5r2o4", "3xp07YWP7Yc", "z_QFAJe4LzE", "Z-1xce1ybzc", "1nmqTjxjYaA",
+      "E0_A1dGNKr8", "ocBoMj43OeA", "zldQeFNHaGQ", "rRgKK6fcMpI", "PNURrNiXP6c", "EAd-F8e_Xdg", "bosqsctO-Ts", "hhBbRZpEXOA", 
+      "hUIAaAq8-mk", "6FXW-UbRtxs", "5a3uZAkGd-g", "1ipzjG4uP2I", "4JM2oOoGqc", "VfNXHqZqKVc", "nWwRBi1wxDA", "j2u5CP1tZgE",
+      "qkmjQtvrHbs", "5gjmeNLDnWE", "KMVSNHl03UY", "nnCVegbJBn0", "5uafA1pAWow", "oFY6TsrnVpg", "knc2mBi6J8E", "om3c_RK3-zI",
+      "Th-9495kgew", "qZKc2z4k0v4", "agGKSCj8hOY", "1sPCgElDxbY", "BueLii2m8e8", "oC4ndv87Whk", "THnIF0rNXNY", "TeYTRiVUGBE", 
+      "lmhUAqYJtxc", "yM6WXTyJRrk", "wSXSn1kC3XM", "q9YcaJMo9ZY", "Qm6WA6ba8dw", "lQosvjFn6yk", "q7Uem7g8frU", "cttXyYE7Azk",
+      "AfHM_2xNt3I", "FE3gymzvpQI", "saLseonjryY"
+    ];
+
+    let selectedDecade = '80s';
+    let activePlaylist = playlist1;
+
+    function getCurrentPlaylist() {
+      return activePlaylist;
+    }
+
+    function getRandomTrackIndex() {
+      return Math.floor(Math.random() * activePlaylist.length);
+    }
+
+    let isShuffleOn = false;
+    let currentIndex = 0;
+    let ytPlayer;
+    let isAudioMuted = true;
+
+function onYouTubeIframeAPIReady() {
+  ytPlayer = new YT.Player('player', {
+    height: '1',
+    width: '1',
+    videoId: activePlaylist[currentIndex],
+    playerVars: { 
+      'autoplay': 1,
+      'mute': 1,
+      'controls': 0,
+      'playsinline': 1
+    },
+    events: {
+      'onReady': function(event) {
+        event.target.mute();
+        event.target.setVolume(90);
+
+        updateMuteUI();
+        updateUI(event);
+      },
+      'onStateChange': onPlayerStateChange,
+      'onError': onPlayerError
+    }
+  });
+}    
+
+document.addEventListener('click', function unmuteOnFirstClick(e) {
+  if (e.target.closest('#muteBtn') || e.target.closest('#sleepBtn') || e.target.closest('#sleepModal')) return; 
+
+  if (isAudioMuted) {
+    isAudioMuted = false;
+    if (ytPlayer && typeof ytPlayer.unMute === 'function') {
+      ytPlayer.unMute();
+      ytPlayer.setVolume(90);
+    }
+    updateMuteUI();
+  }
+}, { once: true });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const muteBtn = document.getElementById('muteBtn');
+  if (muteBtn) {
+    muteBtn.addEventListener('click', function() {
+      isAudioMuted = !isAudioMuted;
+
+      if (ytPlayer && typeof ytPlayer.unMute === 'function') {
+        if (isAudioMuted) {
+          ytPlayer.mute();
+        } else {
+          ytPlayer.unMute();
+          ytPlayer.setVolume(100);
+        }
+      }
+      updateMuteUI();
+    });
+  }
+});
+
+function updateMuteUI() {
+  const muteIcon = document.getElementById('muteIcon');
+  const muteBtn = document.getElementById('muteBtn');
+  if (!muteIcon) return;
+
+  if (isAudioMuted) {
+    muteIcon.textContent = '🔇';
+    if (muteBtn) muteBtn.classList.add('is-muted');
+  } else {
+    muteIcon.textContent = '🔊';
+    if (muteBtn) muteBtn.classList.remove('is-muted');
+  }
+}
+
+if (window.YT && window.YT.Player) {
+  onYouTubeIframeAPIReady();
+}
+    
+    function updateUI() {
+      const id = activePlaylist[currentIndex];
+      document.getElementById('trackThumb').src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+      document.getElementById('trackInput').value = currentIndex + 1;
+      document.getElementById('trackTotal').innerText = `/${activePlaylist.length}`;
+      
+      fetchTrackTitle();
+    }
+
+    function fetchTrackTitle() {
+      if (ytPlayer && ytPlayer.getVideoData) {
+        const title = ytPlayer.getVideoData().title;
+        if (title) {
+          document.getElementById('trackTitle').innerText = title;
+          document.getElementById('trackTitle').title = title;
+          return;
+        }
+      }
+      document.getElementById('trackTitle').innerText = `Track ${currentIndex + 1}`;
+    }
+
+    function togglePlay() {
+      if (!ytPlayer) return;
+      const state = ytPlayer.getPlayerState();
+      if (state === YT.PlayerState.PLAYING) {
+        ytPlayer.pauseVideo();
+      } else {
+        ytPlayer.playVideo();
+      }
+    }
+
+function flashButton(btn) {
+  if (!btn || !(btn instanceof HTMLElement)) return;
+
+  if (btn._timer) clearTimeout(btn._timer);
+
+  btn.classList.add('is-pressed');
+
+  btn._timer = setTimeout(function() {
+    btn.classList.remove('is-pressed');
+    btn.blur();
+    if (document.activeElement) {
+      document.activeElement.blur();
+    }
+  }, 1000);
+}
+
+    function changeDecade(decade) {
+      if (decade !== '80s' && decade !== '70s') return;
+
+      selectedDecade = decade;
+      activePlaylist = (decade === '80s') ? playlist1 : playlist2;
+
+      currentIndex = isShuffleOn ? getRandomTrackIndex() : 0;
+
+      const trackInput = document.getElementById('trackInput');
+      if (trackInput) {
+        trackInput.min = 1;
+        trackInput.max = activePlaylist.length;
+        trackInput.value = currentIndex + 1;
+      }
+
+      const id = activePlaylist[currentIndex];
+      if (ytPlayer && typeof ytPlayer.loadVideoById === 'function') {
+        ytPlayer.loadVideoById(id);
+      }
+
+      updateUI();
+    }
+
+     function toggleShuffle() {
+  isShuffleOn = !isShuffleOn;
+  const btn = document.getElementById('shuffleBtn');
+  if (btn) {
+    if (isShuffleOn) {
+      btn.classList.add('is-active');
+    } else {
+      btn.classList.remove('is-active');
+    }
+  }
+}
+
+     function nextTrack(e) {
+    if (e && e.preventDefault) e.preventDefault();
+
+  const btn = e ? (e.currentTarget || e.target) : null;
+  flashButton(btn);
+
+  if (isShuffleOn) {
+    randomNextTrack();
+    return;
+  }
+   currentIndex++;
+   if (currentIndex >= activePlaylist.length) {
+     currentIndex = 0;
+   }
+
+  renderTrackChange();
+  }
+
+    function randomNextTrack() {
+    let newIndex;
+
+    do {
+      newIndex = getRandomTrackIndex();
+    } while (newIndex === currentIndex && activePlaylist.length > 1);
+
+    currentIndex = newIndex;
+
+    renderTrackChange();
+  }
+
+   function advanceToNextTrack() {
+  if (isShuffleOn) {
+    randomNextTrack();
+  } else {
+   currentIndex++;
+   if (currentIndex >= activePlaylist.length) {
+     currentIndex = 0;
+   }
+    renderTrackChange();
+  }
+}
+
+    function prevTrack(e) {
+      if (e && e.preventDefault) e.preventDefault();
+
+      const btn = e ? (e.currentTarget || e.target) : null;
+      flashButton(btn);
+      currentIndex--;
+      if (currentIndex < 0) {
+        currentIndex = activePlaylist.length - 1;
+      }
+
+      renderTrackChange();
+    }
+
+    function renderTrackChange() {
+      const currentNum = currentIndex + 1;
+      const trackElem = document.getElementById('trackInput');
+
+      if (trackElem) {
+        trackElem.value = currentNum;
+      }
+
+      const id = activePlaylist[currentIndex];
+      const thumb = document.getElementById('trackThumb');
+
+      if (thumb) {
+        thumb.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+      }
+
+      if (ytPlayer && typeof ytPlayer.loadVideoById === 'function') {
+        ytPlayer.loadVideoById(id);
+      }
+
+      fetchTrackTitle();
+    }
+
+   function jumpToTrack(val) {
+  const requestedNum = parseInt(val, 10);
+  const minTrack = 1;
+  const maxTrack = activePlaylist.length;
+
+  if (
+    !isNaN(requestedNum) &&
+    requestedNum >= minTrack &&
+    requestedNum <= maxTrack
+  ) {
+    currentIndex = requestedNum - 1;
+    renderTrackChange();
+  } else {
+    const trackElem = document.getElementById('trackInput');
+    if (trackElem) {
+      trackElem.value = currentIndex + 1;
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const buttons = document.querySelectorAll('.controls button');
+  buttons.forEach(function(btn) {
+    btn.addEventListener('touchend', function() {
+      setTimeout(() => btn.blur(), 50);
+    });
+  });
+});
+
+    function setVolume(val) {
+      if (ytPlayer && ytPlayer.setVolume) {
+        ytPlayer.setVolume(val);
+      }
+    }
+
+let initialLoad = true;
+function onPlayerStateChange(event) {
+  const btn = document.getElementById('playBtn');
+
+  if (initialLoad && event.data === YT.PlayerState.PLAYING) {
+    initialLoad = false;
+
+    event.target.pauseVideo();
+    event.target.unMute();
+    event.target.setVolume(100);
+
+    isAudioMuted = false;
+
+    btn.innerText = '▶';
+    btn.classList.add('is-paused');
+
+    updateMuteUI();
+    updateUI(event);
+
+    return;
+  }
+
+  if (event.data === YT.PlayerState.PLAYING) {
+    btn.innerText = '⏸';
+    btn.classList.remove('is-paused');
+    document.getElementById('trackThumb').classList.add('is-playing');
+    fetchTrackTitle();
+
+  } else if (event.data === YT.PlayerState.PAUSED) {
+    btn.innerText = '▶';
+    btn.classList.add('is-paused');
+    document.getElementById('trackThumb').classList.remove('is-playing');
+
+  } else if (event.data === YT.PlayerState.ENDED) {
+    document.getElementById('trackThumb').classList.remove('is-playing');
+    advanceToNextTrack();
+  }
+}   
+
+    function onPlayerError(event) {
+      console.warn(`Track ${currentIndex + 1} is unplayable. Skipping...`);
+      advanceToNextTrack();
+    }
+
+let currentCount = Math.floor(Math.random() * (25 - 10 + 1)) + 10;
+
+function updateFakeListeners() {
+  const countElem = document.getElementById('listenerCount');
+  
+  if (countElem) {
+    countElem.innerText = `Online: ${currentCount}`;
+    const delta = Math.floor(Math.random() * 5) - 2;
+    currentCount = Math.max(5, currentCount + delta);
+  }
+}
+
+updateFakeListeners();
+setInterval(updateFakeListeners, 15000);
+  </script>
+</body>
+</html>
