@@ -769,9 +769,9 @@ function onYouTubeIframeAPIReady() {
      'onReady': function(event) {
         event.target.mute();
         event.target.setVolume(90);
-
-        updateMuteUI();
         updateUI(event);
+        updateMuteUI();
+        
       },
       'onStateChange': onPlayerStateChange,
       'onError': onPlayerError
