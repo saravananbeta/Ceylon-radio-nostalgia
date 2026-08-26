@@ -884,7 +884,8 @@ function flashButton(btn) {
 
       currentIndex = isShuffleOn ? getRandomTrackIndex() : 0;
 
-      const trackInput = document.getElementById('trackInput');
+      /* const trackInput = document.getElementById('trackInput');  */
+       trackInput.value = 1;  //Added line
       if (trackInput) {
         trackInput.min = 1;
         trackInput.max = activePlaylist.length;
