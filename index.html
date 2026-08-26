@@ -591,16 +591,7 @@
       <span id="trackTitle" class="track-title" title="Track Title">Loading Title...</span>
       <div class="track-sub">
         <span class="track-sub">Autoshuffled.</span>
-        <!-- <input 
-          type="number" 
-          id="trackInput" 
-          class="track-input" 
-          min="1" 
-          max="26" 
-          value= this.value
-          onchange="jumpToTrack(this.value)"
-          onkeydown="if(event.key==='Enter') this.blur()"
-        /-->  
+         
       <!--  <span id="trackTotal">/26</span>  -->
       </div>
     </div>   
@@ -1084,3 +1075,15 @@ setInterval(updateFakeListeners, 15000);
   </script>
 </body>
 </html>
+
+*********
+<input 
+          type="number" 
+          id="trackInput" 
+          class="track-input" 
+          min="1" 
+          max="26" 
+          value= "1"
+          onchange="jumpToTrack(this.value)"
+          onkeydown="if(event.key==='Enter') this.blur()"
+          >
