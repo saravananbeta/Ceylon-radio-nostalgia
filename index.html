@@ -711,6 +711,34 @@
       "AfHM_2xNt3I", "FE3gymzvpQI", "saLseonjryY"
     ];
 
+       /**
+ * Fisher-Yates Shuffle algorithm.
+ * Mutates the original array in-place, making the changes instantly visible
+ * to any other function accessing `playlist`.
+ */
+function shufflePlaylist1(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    // Pick a random index from 0 to i
+    const j = Math.floor(Math.random() * (i + 1));
+    // Swap elements array[i] and array[j]
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+function shufflePlaylist2(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    // Pick a random index from 0 to i
+    const j = Math.floor(Math.random() * (i + 1));
+    // Swap elements array[i] and array[j]
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}    
+
+// Perform the shuffle
+shufflePlaylist(playlist1);
+shufflePlaylist(playlist12);
+    
+
+
     let selectedDecade = '80s';
     let activePlaylist = playlist1;
 
