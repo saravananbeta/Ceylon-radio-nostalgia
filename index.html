@@ -766,7 +766,7 @@ function onYouTubeIframeAPIReady() {
       'playsinline': 1
     },
     events: {
-      'onReady': function(event) {
+     /* 'onReady': function(event) {
         event.target.mute();
         event.target.setVolume(90);
 
@@ -775,7 +775,16 @@ function onYouTubeIframeAPIReady() {
       },
       'onStateChange': onPlayerStateChange,
       'onError': onPlayerError
-    }
+    } */
+   'onReady': function(event) {  //Temperorily added to test
+  document.getElementById('trackTitle').innerText = 'READY TEST';
+
+  event.target.mute();
+  event.target.setVolume(90);
+
+  updateMuteUI();
+  updateUI(event);
+}   
   });
 }    
 
@@ -884,8 +893,8 @@ function flashButton(btn) {
 
       currentIndex = isShuffleOn ? getRandomTrackIndex() : 0;
 
-      /* const trackInput = document.getElementById('trackInput');  */
-       trackInput.value = 1;  //Added line
+       const trackInput = document.getElementById('trackInput');  
+       trackInput.value = 1;  
       if (trackInput) {
         trackInput.min = 1;
         trackInput.max = activePlaylist.length;
