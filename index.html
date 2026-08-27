@@ -592,12 +592,13 @@
   <!-- Minimalist Radio Player (Centered at Bottom) -->
   <div class="player-bar">
     <img id="trackThumb" src="" alt="Thumb" class="thumb" />
-    
+
+  
    <div class="track-info">
       <span id="trackTitle" class="track-title" title="Track Title">Loading Title...</span>
-      <div> <span id="trackNumber" class="track-sub"></span> </div>
+      <div> <span id="trackNumber" class="track-sub" innerText = "></span> </div>
       <div> <span id="trackTotal" class="track-sub"></span> </div>
-      <!-- <div> <span class="track-sub"> Shuffling </span> </div> -->
+       <div> <span class="track-sub"> Shuffled </span> </div>
     </div> 
     <!-- Old track info which has Input Box. 
     <div class="track-info">
@@ -762,7 +763,7 @@ shufflePlaylist(playlist1);
 shufflePlaylist(playlist2);
 shufflePlaylist(playlist3);
 
-
+  
 
     let selectedDecade = '80s';
     let activePlaylist = playlist1;
@@ -876,7 +877,7 @@ if (window.YT && window.YT.Player) {
       }
       document.getElementById('trackTitle').innerText = `Track ${currentIndex + 1}`;
     }
-
+   getNumbers(); 
     function togglePlay() {
       if (!ytPlayer) return;
       const state = ytPlayer.getPlayerState();
@@ -926,8 +927,7 @@ function flashButton(btn) {
       }
 
       updateUI();
-       document.getElementById('trackTotal').innerText = `${activePlaylist.length} songs`; 
-       document.getElementById('trackNumber').innerText = currentIndex + 1; 
+       
     }
 
      function toggleShuffle() {
@@ -1112,6 +1112,11 @@ function updateFakeListeners() {
 
 updateFakeListeners();
 setInterval(updateFakeListeners, 15000);
+
+function getNumbers(){
+document.getElementById('trackTotal').innerText = `${activePlaylist.length} songs`; 
+document.getElementById('trackNumber').innerText = currentIndex + 1;  
+}
   </script>
 </body>
 </html>
