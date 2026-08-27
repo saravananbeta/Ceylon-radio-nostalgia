@@ -1118,8 +1118,8 @@ updateFakeListeners();
 setInterval(updateFakeListeners, 15000);
 
 function getNumbers(){
-document.getElementById('trackTotal').innerText = `${activePlaylist.length} songs`; 
-document.getElementById('trackNumber').innerText = `${currentIndex + 1} of`;  
+document.getElementById('trackTotal').innerText = `${activePlaylist.length}`; 
+document.getElementById('trackNumber').innerText = ` / ${currentIndex + 1} of`;  
 }
   </script>
 </body>
