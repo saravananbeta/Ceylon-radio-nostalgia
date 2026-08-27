@@ -925,6 +925,8 @@ function flashButton(btn) {
       }
 
       updateUI();
+       document.getElementById('trackTotal').innerText = `${activePlaylist.length} songs`; 
+       document.getElementById('trackNumber').innerText = currentIndex + 1; 
     }
 
      function toggleShuffle() {
