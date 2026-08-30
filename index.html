@@ -615,7 +615,7 @@
     <span>60s</span>
   </label>
   <!-- <button id="sleepBtn" onclick="openSleep()">🌙 Sleep timer</button> -->
-  <button id="sleepBtn" onclick="openSleep()">🌙 Sleep <span class="timer-text">timer</span></button>
+  <button id="sleepBtn" onclick="openSleep()">🌙 <span class="timer-text"> Sleep timer</span></button>
  </div>
 
   <!-- Minimalist Radio Player (Centered at Bottom) -->
@@ -719,7 +719,7 @@
       
       if (mins === 0) { 
         //btn.innerHTML = '🌙 Sleep timer'; 
-        btn.innerHTML = '🌙 Sleep <span class="timer-text">timer</span>';
+        btn.innerHTML = '🌙 <span class="timer-text">timer</span>';
         return; 
       }
       
@@ -738,7 +738,7 @@
             ytPlayer.pauseVideo();
           }
           //btn.innerHTML = '🌙 Sleep timer';
-          btn.innerHTML = '🌙 Sleep <span class="timer-text">timer</span>';
+          btn.innerHTML = '🌙 <span class="timer-text">timer</span>';
         }
       }, 1000);
     }
