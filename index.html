@@ -955,16 +955,13 @@ function flashButton(btn) {
   if (btn) {
     if (isShuffleOn) {
       btn.classList.add('is-active');
-      changeDecade(decade);
-      currentIndex = index;
     } else {
       btn.classList.remove('is-active');
-      changeDecade(decade);
-      currentIndex = index;
     }
   }
-  getNumbers();   
-// renderTrackChange();
+  currentIndex = index;     
+  changeDecade(decade);     
+  getNumbers();       
 }
 
      function nextTrack(e) {
