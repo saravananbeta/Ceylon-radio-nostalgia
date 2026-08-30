@@ -962,14 +962,15 @@ function flashButton(btn) {
       selectedDecade = decade;
       if (decade === '80s') {
         activePlaylist = isShuffleOn ? originalPlaylist1 : shuffledPlaylist1;
-        //activePlaylist = playlist1;
+        currentIndex = 0;
       }
       else if (decade === '70s') {
         activePlaylist = isShuffleOn ? originalPlaylist2 : shuffledPlaylist2;
-        //activePlaylist = playlist1;
+        currentIndex = 0;
       }
       else {
         activePlaylist = isShuffleOn ? originalPlaylist3 : shuffledPlaylist3;
+        currentIndex = 0;
       }
         
 
