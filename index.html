@@ -880,7 +880,7 @@ if (window.YT && window.YT.Player) {
   const videoId = activePlaylist[currentIndex];
 
   // Instantly set fallback text while fetching; this makes title display very fast.
-  document.getElementById('trackTitle').innerText = `Loading Track ${currentIndex + 1}...`;
+  //document.getElementById('trackTitle').innerText = `Loading Track ${currentIndex + 1}...`;
 
   fetch(`https://noembed.com/embed?dataType=json&url=https://www.youtube.com/watch?v=${videoId}`)
     .then(response => response.json())
