@@ -800,9 +800,9 @@ shufflePlaylist(playlist3);
       return activePlaylist;
     }
 
-    function getRandomTrackIndex() {
+    /* function getRandomTrackIndex() {
       return Math.floor(Math.random() * activePlaylist.length);
-    }
+    } */
 
     let isShuffleOn = false;
     let currentIndex = 0;
@@ -958,12 +958,21 @@ function flashButton(btn) {
       if (decade !== '80s' && decade !== '70s' && decade !== '60s') return;
 
       selectedDecade = decade;
-      if (decade === '80s') activePlaylist = playlist1;
-      else if (decade === '70s') activePlaylist = playlist2;
-      else activePlaylist = playlist3
+      if (decade === '80s') {
+        activePlaylist = isShuffleOn ? playlist1 : shuffledPlayList1;
+        //activePlaylist = playlist1;
+      }
+      else if (decade === '70s') {
+        activePlaylist = isShuffleOn ? playlist2 : shuffledPlayList2;
+        //activePlaylist = playlist1;
+      }
+      else {
+        activePlaylist = isShuffleOn ? playlist3 : shuffledPlayList3;
+      }
+        
 
-      currentIndex = isShuffleOn ? getRandomTrackIndex() : 0;
-
+      //currentIndex = isShuffleOn ? getRandomTrackIndex() : 0;
+      currentIndex = 0;
       /* const trackInput = document.getElementById('trackInput');    
       if (trackInput) {
         trackInput.min = 1;
