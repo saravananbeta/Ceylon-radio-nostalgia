@@ -1066,6 +1066,7 @@ function flashButton(btn) {
         currentIndex = activePlaylist.length - 1;
       }
       renderTrackChange();
+      if (!ytPlayer) return; ytPlayer.pauseVideo();
     }
 
     function renderTrackChange() {
