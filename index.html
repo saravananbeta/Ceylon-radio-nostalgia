@@ -509,7 +509,7 @@
         left: 20px;
         right: auto;
       }
-      #sleepBtn .timer-text {    /* This makes the name of Sleep timer simply as Sleep on mobile */
+      #sleepBtn.timer-text {    /* This makes the name of Sleep timer simply as Moon emoji on mobile */
      display: none;
      }
       .time-display {
@@ -663,7 +663,7 @@
   </div>
 
   <!-- Sleep Timer Button Trigger -->
-  <button id="sleepBtn" onclick="openSleep()">🌙 Sleep timer</button>
+  <button id="sleepBtn" onclick="openSleep()">⏰Sleep timer</button>
 
   <!-- Sleep Timer Modal Popup -->
   <div id="sleepModal" onclick="if(event.target==this)closeSleep()">
@@ -1197,3 +1197,4 @@ document.getElementById('trackTotal').innerText = `${activePlaylist.length} \u{2
 *********
 
 /* activePlaylist = (decade === '80s') ? playlist1 : playlist2; */
+🌙 
