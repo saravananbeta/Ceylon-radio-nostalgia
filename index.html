@@ -1045,16 +1045,12 @@ function flashButton(btn) {
   } */
 
    function advanceToNextTrack() {
- /* if (isShuffleOn) {
-    randomNextTrack();
-  } else {
-   currentIndex++;
-   if (currentIndex >= activePlaylist.length) {
-     currentIndex = 0;
-   } */
     currentIndex++;
+      if (currentIndex >= activePlaylist.length) {
+      currentIndex = 0;
+      }  
     renderTrackChange();
-}
+  }
 
     function prevTrack(e) {
       if (e && e.preventDefault) e.preventDefault();
