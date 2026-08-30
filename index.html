@@ -908,7 +908,7 @@ if (window.YT && window.YT.Player) {
 
      function fetchTrackTitle() {
   const activeList = getActivePlaylist();
-  const videoId = activeList[currentIndex];
+  const videoId = activePlaylist[currentIndex];
 
   // Instantly set fallback text while fetching; this makes title display very fast.
   document.getElementById('trackTitle').innerText = `Loading Track ${currentIndex + 1}...`;
