@@ -794,9 +794,6 @@ function shufflePlaylist(array) {
     shufflePlaylist(shuffledPlaylist3);
 
     let isShuffleOn = false;    
-
-  
-
     let selectedDecade = '80s';
     let activePlaylist = originalPlaylist1;
 
@@ -961,16 +958,16 @@ function flashButton(btn) {
 
       selectedDecade = decade;
       if (decade === '80s') {
-        activePlaylist = isShuffleOn ? originalPlaylist1 : shuffledPlaylist1;
-        currentIndex = 0;
+        activePlaylist = isShuffleOn ? shuffledPlaylist1 : originalPlaylist1;
+        //currentIndex = 0;
       }
       else if (decade === '70s') {
-        activePlaylist = isShuffleOn ? originalPlaylist2 : shuffledPlaylist2;
-        currentIndex = 0;
+        activePlaylist = isShuffleOn ? shuffledPlaylist2 : originalPlaylist2;
+        //currentIndex = 0;
       }
       else {
-        activePlaylist = isShuffleOn ? originalPlaylist3 : shuffledPlaylist3;
-        currentIndex = 0;
+        activePlaylist = isShuffleOn ? shuffledPlaylist3 : originalPlaylist3;
+        //currentIndex = 0;
       }
         
 
