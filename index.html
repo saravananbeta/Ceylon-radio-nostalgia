@@ -798,7 +798,7 @@ function shufflePlaylist(array) {
   
 
     let selectedDecade = '80s';
-    let activePlaylist = OriginalPlaylist1;
+    let activePlaylist = originalPlaylist1;
 
     function getCurrentPlaylist() {
       return activePlaylist;
@@ -963,15 +963,15 @@ function flashButton(btn) {
 
       selectedDecade = decade;
       if (decade === '80s') {
-        activePlaylist = isShuffleOn ? playlist1 : shuffledPlaylist1;
+        activePlaylist = isShuffleOn ? oruginalPlaylist1 : shuffledPlaylist1;
         //activePlaylist = playlist1;
       }
       else if (decade === '70s') {
-        activePlaylist = isShuffleOn ? playlist2 : shuffledPlaylist2;
+        activePlaylist = isShuffleOn ? originalPlaylist2 : shuffledPlaylist2;
         //activePlaylist = playlist1;
       }
       else {
-        activePlaylist = isShuffleOn ? playlist3 : shuffledPlaylist3;
+        activePlaylist = isShuffleOn ? originalPlaylist3 : shuffledPlaylist3;
       }
         
 
