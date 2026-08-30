@@ -1182,10 +1182,10 @@ setInterval(updateFakeListeners, 15000);
 function getNumbers(){
 document.getElementById('trackNumber').innerText = `${currentIndex + 1} / `; 
 if (isShuffleOn){ 
-document.getElementById('trackTotal').innerText = `${originalPlaylist.length} \u{1F500}`; 
+document.getElementById('trackTotal').innerText = `${activePlaylist.length} \u{1F500}`; 
 }
 else{
-document.getElementById('trackTotal').innerText = `${originalPlaylist.length} \u{27A1}`; 
+document.getElementById('trackTotal').innerText = `${activePlaylist.length} \u{27A1}`; 
 }
 }
     
