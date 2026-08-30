@@ -513,7 +513,9 @@
       .time-display {
         font-size: 0.85rem;
       }
-
+      #prevBtn {
+    display: none !important;
+  }
     .yt-links {
   color: rgba(255, 255, 255, 0.5);
   font-size: 0.68rem;    
@@ -646,7 +648,7 @@
   -->
   <div class="controls">
   <button id="shuffleBtn" onclick="toggleShuffle()" title="Shuffle">&#x1F500;</button>
-  <button onclick="prevTrack(event)" title="Previous">◀◀</button>
+  <button id="prevBtn" onclick="prevTrack(event)" title="Previous">◀◀</button>
   <button id="playBtn" onclick="togglePlay()" title="Play/Pause">▶</button>
   <button onclick="nextTrack(event)" title="Next">▶▶</button>
   </div>
