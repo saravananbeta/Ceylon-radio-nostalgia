@@ -1011,10 +1011,10 @@ function flashButton(btn) {
   const btn = e ? (e.currentTarget || e.target) : null;
   flashButton(btn);
 
-  if (isShuffleOn) {
+  /*if (isShuffleOn) {
     randomNextTrack();
     return;
-  }
+  } */
    currentIndex++;
    if (currentIndex >= activePlaylist.length) {
      currentIndex = 0;
@@ -1062,7 +1062,7 @@ function flashButton(btn) {
 
     function renderTrackChange() {
       const currentNum = currentIndex + 1;
-     const trackElem = document.getElementById('trackInput');
+    // const trackElem = document.getElementById('trackInput');
 
       if (trackElem) {
         trackElem.value = currentNum;
