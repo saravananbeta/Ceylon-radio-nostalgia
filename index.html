@@ -550,13 +550,6 @@
         width: 60px;
       }
 
-     /* .player-bar {
-        bottom: 45px;
-        gap: 8px;
-        padding: 6px 12px;
-        max-width: 97vw;
-      }
-
       .track-info {
         max-width: 100px;
       }
@@ -631,24 +624,7 @@
       </div>
       <!-- <div> <span class="track-sub"> Shuffled </span> </div>  -->
     </div> 
-    <!-- Old track info which has Input Box. 
-    <div class="track-info">
-      <span id="trackTitle" class="track-title" title="Track Title">Loading Title...</span>
-     <div class="track-sub">
-       <input 
-          type="number" 
-          id="trackInput" 
-          class="track-input" 
-          min="1" 
-          max="26" 
-          value= "1"
-          onchange="jumpToTrack(this.value)"
-          onkeydown="if(event.key==='Enter') this.blur()"
-          >
-       <span id="trackTotal">/41</span>
-      </div>
-    </div>  
-  -->
+  
   <div class="controls">
   <button id="shuffleBtn" onclick="toggleShuffle(selectedDecade, currentIndex)" title="Shuffle">&#x1F500;</button>
   <button id="prevBtn" onclick="prevTrack(event)" title="Previous">◀◀</button>
@@ -895,23 +871,9 @@ if (window.YT && window.YT.Player) {
     function updateUI() {
       const id = activePlaylist[currentIndex];
       document.getElementById('trackThumb').src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-     /* document.getElementById('trackInput').value = currentIndex + 1;  */
-     /* document.getElementById('trackTotal').innerText = `${activePlaylist.length} songs`; */
-    /*  document.getElementById('trackNumber').innerText = currentIndex + 1; */
       fetchTrackTitle();
     }
 
-    /* function fetchTrackTitle() {
-      if (ytPlayer && ytPlayer.getVideoData) {
-        const title = ytPlayer.getVideoData().title;
-        if (title) {
-          document.getElementById('trackTitle').innerText = title;
-          document.getElementById('trackTitle').title = title;
-          return;
-        }
-      }
-      document.getElementById('trackTitle').innerText = `Track ${currentIndex + 1}`;
-    } */
 
   function fetchTrackTitle() {
   const activePlaylist = getCurrentPlaylist();
@@ -978,23 +940,12 @@ function flashButton(btn) {
         //currentIndex = 0;
       }
         
-
-      //currentIndex = isShuffleOn ? getRandomTrackIndex() : 0;
       currentIndex = 0;
-      /* const trackInput = document.getElementById('trackInput');    
-      if (trackInput) {
-        trackInput.min = 1;
-        trackInput.max = activePlaylist.length;
-        trackInput.value = currentIndex + 1;
-      }   */
-
       const id = activePlaylist[currentIndex];
       if (ytPlayer && typeof ytPlayer.loadVideoById === 'function') {
         ytPlayer.loadVideoById(id);
       }
-
       updateUI();
-       
     }
 
      function toggleShuffle(decade, index) {
@@ -1020,10 +971,6 @@ function flashButton(btn) {
   const btn = e ? (e.currentTarget || e.target) : null;
   flashButton(btn);
 
-  /*if (isShuffleOn) {
-    randomNextTrack();
-    return;
-  } */
    currentIndex++;
    if (currentIndex >= activePlaylist.length) {
      currentIndex = 0;
@@ -1031,18 +978,6 @@ function flashButton(btn) {
   renderTrackChange();
   if (!ytPlayer) return; ytPlayer.pauseVideo();
   }
-
-  /*  function randomNextTrack() {
-    let newIndex;
-
-    do {
-      newIndex = getRandomTrackIndex();
-    } while (newIndex === currentIndex && activePlaylist.length > 1);
-
-    currentIndex = newIndex;
-
-    renderTrackChange();
-  } */
 
    function advanceToNextTrack() {
     currentIndex++;
@@ -1065,14 +1000,7 @@ function flashButton(btn) {
       if (!ytPlayer) return; ytPlayer.pauseVideo();
     }
 
-    function renderTrackChange() {
-      // const currentNum = currentIndex + 1;
-    /* const trackElem = document.getElementById('trackInput');
-
-      if (trackElem) {
-        trackElem.value = currentNum;
-      }  */
-
+      function renderTrackChange() {
       const id = activePlaylist[currentIndex];
       const thumb = document.getElementById('trackThumb');
 
