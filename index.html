@@ -645,8 +645,8 @@
     </div>  
   -->
   <div class="controls">
-  <!-- <button id="shuffleBtn" onclick="toggleShuffle()" title="Shuffle">&#x1F500;</button> -->
-  <button onclick="prevTrack(event)" title="Previous">◀◀</button>  
+  <button id="shuffleBtn" onclick="toggleShuffle()" title="Shuffle">&#x1F500;</button>
+  <!-- <button onclick="prevTrack(event)" title="Previous">◀◀</button>  -->
   <button id="playBtn" onclick="togglePlay()" title="Play/Pause">▶</button>
   <button onclick="nextTrack(event)" title="Next">▶▶</button>
   </div>
@@ -737,7 +737,7 @@
     }
 
     /* Playlist Data & Audio Logic */
-    const playlist1 = [
+    const originalPlaylist1 = [
       "1a_G6_3VXjc", "iVLaWnpAoB0", "xYnPknPmz_A", "G5bCu3X93hs", "xtAoBpump3Y", "O6gLltIk53c", "pvIPv4N_YGE", "ETMZa9jb6kU",
       "0gAJpX6wfPQ", "yupbbWm2tbE", "belw38b7EoQ", "VK3KlGTdIQc", "G9mbXxvOWFo", "rejlq5WO1AM", "q4ZGIG6R17M", "x9LHt9wGeIU",
       "00Rucseox0U", "FxvPEVLFMIk", "_zsC7VJm2Rs", "8Fa07Te-KYQ", "zYnW9qbrsnw", "XMvpKwt6jZ0", "V4eVAyVtR6k",
@@ -749,7 +749,7 @@
       "kcAOmmuT4es", "zKpvatGl9So", "nN78Gnnu8Qo", "VhKz3PF9iw4", "9QKSaElfwQM"
     ];
 
-    const playlist2 = [
+    const originalPlaylist2 = [
       "jS_7UMAXO18", "JbGYHXVwAjY", "Sx8TkOp-vhA", "HKt5_bqNiF4", "Nsv4VPy1t0M", "8dSCb_4sAIQ", "B7V5QOqpWAg", "1bCluVw0-70", 
       "pRfoA6aIFp4", "0Jydo3srxUg", "TlwCWjs3YOg", "JrDtf4XcnIk", "lyKDKp6kvlU", "OXcxtsfP8Ko", "X5xgvkleCVY", "amrYH0MLNpc", 
       "MoRV_104F88", "q9295zePSH4", "LdcFkET5McQ", "_o0XDL5r2o4", "3xp07YWP7Yc", "z_QFAJe4LzE", "Z-1xce1ybzc", "1nmqTjxjYaA",
@@ -761,7 +761,7 @@
       "AfHM_2xNt3I", "FE3gymzvpQI", "saLseonjryY", "DDYFVjtvgYY"
     ];
 
-  const playlist3 = [
+  const originalPlaylist3 = [
       "ovFi6AcOw-c", "ZMXB5MKiabw", "-nrnGjxOLA0", "pOU-abdx0b4", "cBkPFtb1sMQ", "4Ts2ZuaPRkk", "-Bi1iST7EWE", "9vDKA33y4oo",
       "g9cLHP1RE4k", "PkWkcpsGYRQ", "HZdZLdE5KBA", "a-ATN4ZhMos", "nBvIsNfFSZM", "uoJc1hBOUH4", "HpMshzNxdoA", "Jn2IUAHfjOo",
       "D3kWLpgkeDM", "W2M7CF7sRrU", "X1ojBdibGv4", "0H4Ai65Vvck", "k2updOWY6Dk", "_n9TkjMAQm4", "D-_VfDf2NTk", "Qs3B_1fyGJM",
@@ -785,11 +785,15 @@ function shufflePlaylist(array) {
   }
 }
 
+    // Separate copies so shuffling doesn't mutate original
+    const shuffledPlaylist1 = [...originalPlaylist1];
+    shufflePlaylist(shuffledPlaylist1);
+    const shuffledPlaylist2 = [...originalPlaylist2];
+    shufflePlaylist(shuffledPlaylist2);
+    const shuffledPlaylist3 = [...originalPlaylist3];
+    shufflePlaylist(shuffledPlaylist3);
 
-// Perform the shuffle
-shufflePlaylist(playlist1);
-shufflePlaylist(playlist2);
-shufflePlaylist(playlist3);
+    let isShuffleOn = false;    
 
   
 
@@ -959,15 +963,15 @@ function flashButton(btn) {
 
       selectedDecade = decade;
       if (decade === '80s') {
-        activePlaylist = isShuffleOn ? playlist1 : shuffledPlayList1;
+        activePlaylist = isShuffleOn ? playlist1 : shuffledPlaylist1;
         //activePlaylist = playlist1;
       }
       else if (decade === '70s') {
-        activePlaylist = isShuffleOn ? playlist2 : shuffledPlayList2;
+        activePlaylist = isShuffleOn ? playlist2 : shuffledPlaylist2;
         //activePlaylist = playlist1;
       }
       else {
-        activePlaylist = isShuffleOn ? playlist3 : shuffledPlayList3;
+        activePlaylist = isShuffleOn ? playlist3 : shuffledPlaylist3;
       }
         
 
