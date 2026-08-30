@@ -60,7 +60,9 @@
       text-shadow: 0 3px 12px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.8);
       line-height: 1;
     }
-
+    #sleepBtn .timer-text {    /* This makes the name of Sleep timer simply as Sleep on mobile */
+    display: none;
+  }
     /* Top Right Container for Clock & Mute Button */
     .top-right-container {
       position: fixed;
@@ -612,7 +614,8 @@
     <input type="radio" name="decade" value="60s" onchange="changeDecade('60s')" />
     <span>60s</span>
   </label>
-  <button id="sleepBtn" onclick="openSleep()">🌙 Sleep timer</button>
+  <!-- <button id="sleepBtn" onclick="openSleep()">🌙 Sleep timer</button> -->
+  <button id="sleepBtn" onclick="openSleep()">🌙 Sleep <span class="timer-text">timer</span></button>
  </div>
 
   <!-- Minimalist Radio Player (Centered at Bottom) -->
@@ -715,7 +718,8 @@
       const btn = document.getElementById('sleepBtn');
       
       if (mins === 0) { 
-        btn.innerHTML = '🌙 Sleep timer'; 
+        //btn.innerHTML = '🌙 Sleep timer'; 
+        btn.innerHTML = '🌙 Sleep <span class="timer-text">timer</span>';
         return; 
       }
       
@@ -733,7 +737,8 @@
           if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
             ytPlayer.pauseVideo();
           }
-          btn.innerHTML = '🌙 Sleep timer';
+          //btn.innerHTML = '🌙 Sleep timer';
+          btn.innerHTML = '🌙 Sleep <span class="timer-text">timer</span>';
         }
       }, 1000);
     }
