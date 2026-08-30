@@ -596,15 +596,15 @@
   <!-- Decade Selector -->
   <div class="decade-selector" role="radiogroup" aria-label="Music decade">
   <label>
-    <input type="radio" name="decade" value="80s" checked onchange="('80s')" />
+    <input type="radio" name="decade" value="80s" checked onchange="changeDecade('80s')" />
     <span>80s</span>
   </label>
   <label>
-    <input type="radio" name="decade" value="70s" onchange="('70s')" />
+    <input type="radio" name="decade" value="70s" onchange="changeDecade('70s')" />
     <span>70s</span>
   </label>
   <label>
-    <input type="radio" name="decade" value="60s" onchange="('60s')" />
+    <input type="radio" name="decade" value="60s" onchange="changeDecade('60s')" />
     <span>60s</span>
   </label>
   <!-- <button id="sleepBtn" onclick="openSleep()">🌙 Sleep timer</button> -->
@@ -924,7 +924,6 @@ function flashButton(btn) {
 }
 
     function changeDecade(decade) {
-      const activePlaylist = originalPlaylist1;
      // const activePlaylist = getCurrentPlaylist();
       if (decade !== '80s' && decade !== '70s' && decade !== '60s') return;
 
