@@ -650,7 +650,7 @@
     </div>  
   -->
   <div class="controls">
-  <button id="shuffleBtn" onclick="toggleShuffle(selectedDecade)" title="Shuffle">&#x1F500;</button>
+  <button id="shuffleBtn" onclick="toggleShuffle(selectedDecade, currentIndex)" title="Shuffle">&#x1F500;</button>
   <button id="prevBtn" onclick="prevTrack(event)" title="Previous">◀◀</button>
   <button id="playBtn" onclick="togglePlay()" title="Play/Pause">▶</button>
   <button onclick="nextTrack(event)" title="Next">▶▶</button>
@@ -997,16 +997,18 @@ function flashButton(btn) {
        
     }
 
-     function toggleShuffle(decade) {
+     function toggleShuffle(decade, index) {
   isShuffleOn = !isShuffleOn;
   const btn = document.getElementById('shuffleBtn');
   if (btn) {
     if (isShuffleOn) {
       btn.classList.add('is-active');
       changeDecade(decade);
+      currentIndex = index;
     } else {
       btn.classList.remove('is-active');
       changeDecade(decade);
+      currentIndex = index;
     }
   }
   getNumbers();     
