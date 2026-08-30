@@ -529,9 +529,25 @@
   }
 
       .player-bar {
-        width: 100px;
-        min-width: 100px; 
-        min-width: 100px; 
+    	bottom: 45px;
+    	gap: 8px;
+    	padding: 6px 10px;
+    	width: 98vw;          /* Constrains player width inside mobile screen */
+    	max-width: 98vw;
+    	box-sizing: border-box;
+  		}
+
+      .track-info {
+    	width: 60px;
+    	max-width: 60px;
+    	min-width: 60px;
+  		}
+
+      .volume-container input[type="range"] {
+        width: 60px;
+      }
+
+     /* .player-bar {
         bottom: 45px;
         gap: 8px;
         padding: 6px 12px;
@@ -552,7 +568,7 @@
         bottom: 95px;
         gap: 10px;
         padding: 5px 11px;
-      }
+      } */
 
       .decade-selector label {
         font-size: 0.75rem;
