@@ -924,7 +924,8 @@ function flashButton(btn) {
 }
 
     function changeDecade(decade) {
-      const activePlaylist = getCurrentPlaylist();
+      const activePlaylist = originalPlaylist1;
+     // const activePlaylist = getCurrentPlaylist();
       if (decade !== '80s' && decade !== '70s' && decade !== '60s') return;
 
       selectedDecade = decade;
