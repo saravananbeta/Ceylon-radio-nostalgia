@@ -977,6 +977,8 @@ function flashButton(btn) {
    }
   renderTrackChange();
   if (!ytPlayer) return; ytPlayer.pauseVideo();
+  getNumbers(); //Check if needed
+  setTimeout(() => ytPlayer.playVideo(), 1800);
   }
 
    function advanceToNextTrack() {
@@ -998,6 +1000,8 @@ function flashButton(btn) {
       }
       renderTrackChange();
       if (!ytPlayer) return; ytPlayer.pauseVideo();
+      getNumbers(); //Check if needed
+      setTimeout(() => ytPlayer.playVideo(), 1800);
     }
 
       function renderTrackChange() {
