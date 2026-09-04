@@ -95,7 +95,7 @@
 
      .decade-selector {
       position: fixed;
-      bottom: 135px;
+      bottom: 138px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 10;
