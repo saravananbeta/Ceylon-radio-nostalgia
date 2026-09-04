@@ -494,6 +494,7 @@
       .top-right-container { /* Lowering & moving to left in mobile */
         top: 55px;
         left: 20px;  
+		right: auto;
       }
 
       .time-display {
