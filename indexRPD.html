@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Ceylone Radio</title>
+ <link rel ="stylesheet" href="style.css">
+
+	
+  <!-- Cursive Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+  
+</head>
+<body>
+
+
+ 
+  <!-- Background Image -->
+  <picture>
+  <source media="(max-width: 600px)" srcset="Terrace_boy_mobile.jpg" />
+  <img src="Terrace_boy_crop.jpg" alt="Background" class="bg-image" />
+ </picture>
+
+
+  <!-- Title -->
+  <header class="app-header">
+    <h1>Ceylone Radio Nostalgia</h1>
+  </header>
+
+  <!-- Time & Mute -->
+  <div class="top-right-container">
+    <div id="clockDisplay" class="time-display">00:00</div>
+    <div id="listenerCount" class="listener-count">Online: --</div>
+    <button id="muteBtn" class="mute-btn" aria-label="Toggle Sound">
+      <span id="muteIcon">🔇</span>
+    </button>
+  </div>
+
+  <!-- Decade Selector -->
+  <div class="decade-selector" role="radiogroup" aria-label="Music decade">
+  <label>
+    <input type="radio" name="decade" value="80s" checked onchange="changeDecade('80s')" />
+    <span>80s</span>
+  </label>
+  <label>
+    <input type="radio" name="decade" value="70s" onchange="changeDecade('70s')" />
+    <span>70s</span>
+  </label>
+  <label>
+    <input type="radio" name="decade" value="60s" onchange="changeDecade('60s')" />
+    <span>60s</span>
+  </label>
+  <!-- <button id="sleepBtn" onclick="openSleep()">🌙 Sleep timer</button> -->
+  <button id="sleepBtn" onclick="openSleep()">🌙 <span class="timer-text"> Sleep timer</span></button>
+ </div>
+
+  <!-- Single Player Container -->
+  <div class="player-bar">
+    <!-- Row 1: Song Title Centered Above Controls -->
+    <div class="track-title-row">
+      <div class="track-title" id="trackTitle">Title</div>
+    </div>
+
+    <!-- Row 2: Thumbnail, Controls, Volume (Centered) -->
+    <div class="player-controls-row">
+      <img id="trackThumb" src="" alt="Thumb" class="thumb" />
+
+      <div class="controls">
+        <button id="shuffleBtn" onclick="toggleShuffle()" title="Shuffle">&#x1F500;&#xFE0E;</button>
+        <button id="prevBtn" onclick="prevTrack(event)" title="Previous">◀◀</button>
+        <button id="playBtn" onclick="togglePlay()" title="Play/Pause">▶</button>
+        <button onclick="nextTrack(event)" title="Next">▶▶</button>
+      </div>
+
+      <div class="volume-container">
+        <span>🔊</span>
+        <input type="range" id="volumeSlider" min="0" max="100" value="80" oninput="setVolume(this.value)" />
+      </div>
+    </div>
+
+    <!-- Row 3: Metadata (Singer • Year • Track Count / Shuffle) -->
+    <div id="playerMeta" class="meta-details-row"></div>
+  </div>
+
+   <!-- Sleep Timer Button Trigger -->
+ <!-- <button id="sleepBtn" onclick="openSleep()">🌙 Sleep timer</button> -->
+  <button id="sleepBtn" onclick="openSleep()"> 🌙 <span class="timer-text"> Sleep timer</span></button>
+
+  <!-- Sleep Timer Modal Popup -->
+  <div id="sleepModal" onclick="if(event.target==this)closeSleep()">
+    <div class="sleep-box">
+      <div class="sleep-box-title">Stops Playback After</div>
+      <div class="timer-grid">
+        <button onclick="setSleep(30)">30 min</button>
+        <button onclick="setSleep(45)">45 min</button>
+        <button onclick="setSleep(60)" class="full-width">60 min</button>
+      </div>
+      <button class="cancel-btn" onclick="setSleep(0)">Turn Off</button>
+    </div>
+  </div>
+
+
+  <!-- YouTube Playlist Link -->
+  <!-- Underlined Text Link at Bottom Left Corner -->
+  <div class="yt-links">
+    <a href="https://music.youtube.com/playlist?list=PLRhniJbRondg" target="_blank" class="yt-link-text" rel="noopener noreferrer">Playlist 80s</a>
+<a href="https://music.youtube.com/playlist?list=PLZeJKZqVo8uQ" target="_blank" class="yt-link-text" rel="noopener noreferrer">Playlist 70s</a>
+<a href="https://music.youtube.com/playlist?list=PLKSjwCo_iCIQ" target="_blank" class="yt-link-text" rel="noopener noreferrer">Playlist 60s</a>
+  </div>
+
+<!-- Contact form link on left -->
+<a href="/Contact.html" target="_blank" class="contact-text" rel="noopener noreferrer">Suggest a song!</a>
+
+  
+  <div id="player" class="audio-engine"></div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="playlist.js"></script>
+  <script src="script.js"></script>
+
+ 
+</body>
+</html>
