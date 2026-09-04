@@ -224,7 +224,7 @@ fetch('data.json')
       updateUI();
     }
 
-    function toggleShuffle() {
+    /* function toggleShuffle() {
       isShuffleOn = !isShuffleOn;
       const btn = document.getElementById('shuffleBtn');
       if (btn) {
@@ -233,7 +233,22 @@ fetch('data.json')
       }
       renderTrackChange();
       if (!ytPlayer) return; ytPlayer.pauseVideo(); setTimeout(() => ytPlayer.playVideo(), 1500);
+    }  */
+   function toggleShuffle(decade, index) {
+       //const avtivePlaylist = list;
+  isShuffleOn = !isShuffleOn;
+  const btn = document.getElementById('shuffleBtn');
+  if (btn) {
+    if (isShuffleOn) {
+      btn.classList.add('is-active');
+    } else {
+      btn.classList.remove('is-active');
     }
+  }
+  //currentIndex = index;     
+  changeDecade(decade);          
+}
+
 
     function flashButton(btn) {
       if (!btn || !(btn instanceof HTMLElement)) return;
