@@ -409,10 +409,12 @@
   background: rgba(250, 204, 21, 0.15);
 }
 
-/* Shuffle hover – white background */
-#shuffleBtn.hover {
-  color: #000000;
-  background: #ffffff;
+/* Only apply hover effects on devices that actually support hovering (desktops/laptops) */
+@media (hover: hover) {
+  #shuffleBtn.active:hover {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
 }
 /* Shuffle Active hover – white background */
 #shuffleBtn.active:hover {
