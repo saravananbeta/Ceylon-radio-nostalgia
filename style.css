@@ -383,11 +383,12 @@
   display: block;
 }
 
+@media (hover: hover) and (pointer: fine) {  /* Allow hover only on desktop/laptop */
 .control-btn:hover {
   background: #ffffff;   /* For yellow #ffb703; */
   color: #000;
+ }
 }
-
 .control-btn:active {
   transform: scale(0.88);
 }
