@@ -533,15 +533,9 @@
         font-size: 2.0rem;
       }
 
-      .top-right-container { /* Lowering in mobile */
-        top: 55px;
-        right: 20px;
-      }
-
       .time-display {
         font-size: 0.85rem;
       }
-
 
 
        #sleepBtn .timer-text {    /* This makes the name of Sleep timer simply as Moon emoji on mobile */
@@ -565,7 +559,11 @@
         font-size: 0.85rem;
       }
      
-
+       .top-right-container { /* Lowering & moving to left in mobile */
+        top: 55px;
+        left: 20px;  
+		right: auto;
+      }
       #prevBtn {
         display: none !important;
       }
