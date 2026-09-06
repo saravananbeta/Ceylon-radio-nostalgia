@@ -434,6 +434,13 @@
     color: #000000 !important;
   }
 }
+/* Desktop hover only */
+@media (hover: hover) and (pointer: fine) {
+  #shuffleBtn:hover {
+    background: #ffffff !important; 
+    color: #000000 !important;
+  }
+}
 
     .volume-container {
       display: flex;
