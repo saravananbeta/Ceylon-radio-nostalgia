@@ -414,6 +414,11 @@
   color: #000000;
   background: #ffffff;
 }
+/* Shuffle Active hover – white background */
+#shuffleBtn.active:hover {
+  color: #000000 !important;
+  background: #ffffff !important;
+}
 
 
     .volume-container {
