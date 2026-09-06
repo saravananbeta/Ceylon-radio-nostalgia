@@ -416,12 +416,6 @@
     color: #000000 !important;
   }
 }
-/* Shuffle Active hover – white background */
-#shuffleBtn.active:hover {
-  color: #000000 !important;
-  background: #ffffff !important;
-}
-
 
     .volume-container {
       display: flex;
