@@ -408,10 +408,17 @@
   color: #facc15;
   background: rgba(250, 204, 21, 0.15);
 }
-
+#shuffleBtn:not(.active) {
+  color: #ffff;
+  background: #000000;
+}
 /* Tap visual feedback for mobile */
 #shuffleBtn.active:active {
   background: rgba(250, 204, 21, 0.3);
+}
+#shuffleBtn.active:not(.active) {
+  color: #ffff;
+  background: #000000;
 }
 
 /* Ensure touch devices don't hold focus styles */
