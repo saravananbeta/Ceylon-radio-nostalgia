@@ -409,16 +409,16 @@
   background: rgba(250, 204, 21, 0.15);
 }
 #shuffleBtn:not(.active) {
-  color: #ffff;
-  background: #000000;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1) !important;
 }
 /* Tap visual feedback for mobile */
 #shuffleBtn.active:active {
   background: rgba(250, 204, 21, 0.3);
 }
 #shuffleBtn.active:not(.active) {
-  color: #ffff;
-  background: #000000;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Ensure touch devices don't hold focus styles */
@@ -430,7 +430,7 @@
 /* Desktop hover only */
 @media (hover: hover) and (pointer: fine) {
   #shuffleBtn.active:hover {
-    background: #ffffff !important;
+    background: #ffffff !important; 
     color: #000000 !important;
   }
 }
