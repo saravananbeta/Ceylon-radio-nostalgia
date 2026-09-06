@@ -409,6 +409,12 @@
   background: rgba(250, 204, 21, 0.15);
 }
 
+/* Shuffle hover – white background */
+#shuffleBtn.hover {
+  color: #000000;
+  background: #ffffff;
+}
+
 
     .volume-container {
       display: flex;
