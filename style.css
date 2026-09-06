@@ -409,8 +409,13 @@
   background: rgba(250, 204, 21, 0.15);
 }
 
-/* Only apply hover effects on devices that actually support hovering (desktops/laptops) */
-@media (hover: hover) {
+/* Tap visual feedback for mobile */
+#shuffleBtn.active:active {
+  background: rgba(250, 204, 21, 0.3);
+}
+
+/* Desktop hover only */
+@media (hover: hover) and (pointer: fine) {
   #shuffleBtn.active:hover {
     background: #ffffff !important;
     color: #000000 !important;
