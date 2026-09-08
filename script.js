@@ -435,3 +435,13 @@ fetch('data.json')
         //document.getElementById('trackTitle').innerText = showMovie ? 'Movie' : 'Song';
     }, 5000);
 } 
+
+document.addEventListener('keydown', (e) => {
+  // don't trigger if typing in input / textarea
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+  if (e.code === 'Space' || e.key === ' ') {
+    e.preventDefault(); // stop page scroll
+    document.getElementById('playBtn')?.click(); // same as clicking play button
+  }
+});
