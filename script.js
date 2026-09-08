@@ -435,7 +435,7 @@ fetch('data.json')
         //document.getElementById('trackTitle').innerText = showMovie ? 'Movie' : 'Song';
     }, 5000);
 } 
-
+// SPACE BAR to Play/Pause
 document.addEventListener('keydown', (e) => {
   // don't trigger if typing in input / textarea
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
@@ -443,5 +443,21 @@ document.addEventListener('keydown', (e) => {
   if (e.code === 'Space' || e.key === ' ') {
     e.preventDefault(); // stop page scroll
     document.getElementById('playBtn')?.click(); // same as clicking play button
+  }
+});
+
+// Arrows to control Prev/Next
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+  if (e.code === 'Space' || e.key === ' ') {
+    e.preventDefault();
+    document.getElementById('playBtn')?.click();
+  } else if (e.code === 'ArrowRight') {
+    e.preventDefault();
+    document.getElementById('nextBtn')?.click();
+  } else if (e.code === 'ArrowLeft') {
+    e.preventDefault();
+    document.getElementById('prevBtn')?.click();
   }
 });
