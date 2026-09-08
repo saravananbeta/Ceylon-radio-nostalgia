@@ -259,6 +259,7 @@
     }
 
     .track-title {
+	  font-type: italic;
       font-weight: 500;
       font-size: 0.80rem;
       color: #ffffff;
