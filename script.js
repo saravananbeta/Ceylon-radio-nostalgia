@@ -1,4 +1,4 @@
-
+   let lastVolume = parseInt(document.getElementById('volumeSlider')?.value) || 80;
    let localPlaylistData = {};
 
 fetch('data.json')
@@ -80,38 +80,30 @@ fetch('data.json')
       });
     }    
 
-    document.addEventListener('click', function unmuteOnFirstClick(e) {
-      if (e.target.closest('#muteBtn')) return;
-      if (isAudioMuted) {
-        isAudioMuted = false;
-        if (ytPlayer && typeof ytPlayer.unMute === 'function') {
-          ytPlayer.unMute();
-          ytPlayer.setVolume(70);
-        }
-        updateMuteUI();
-      }
-    }, { once: true });
+        document.addEventListener('click', function unmuteOnFirstClick(e) {
+  if (e.target.closest('#muteBtn')) return;
+  if (isAudioMuted) {
+    isAudioMuted = false;
+    if (ytPlayer && typeof ytPlayer.unMute === 'function') {
+      ytPlayer.unMute();
+      setVolume(lastVolume || 80); // was 100
+    }
+    updateMuteUI();
+  }
+}, { once: true });
 
+// Mute button logic
+document.getElementById('muteBtn').addEventListener('click', function() {
+  isAudioMuted = !isAudioMuted;
+  if (isAudioMuted) {
+    ytPlayer.mute();
+  } else {
+    ytPlayer.unMute();
+    setVolume(lastVolume); // will now be last value, not 80
+  }
+  updateMuteUI();
+});
 
- 
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const muteBtn = document.getElementById('muteBtn');
-      if (muteBtn) {
-        muteBtn.addEventListener('click', function() {
-          isAudioMuted = !isAudioMuted;
-          if (ytPlayer && typeof ytPlayer.unMute === 'function') {
-            if (isAudioMuted) {
-              ytPlayer.mute();
-            } else {
-              ytPlayer.unMute();
-              ytPlayer.setVolume(70);
-            }
-          }
-          updateMuteUI();
-        });
-      }
-    });
 
     function updateMuteUI() {
       const muteIcon = document.getElementById('muteIcon');
@@ -290,11 +282,24 @@ fetch('data.json')
       });
     });  
 
-    function setVolume(val) {
-      if (ytPlayer && ytPlayer.setVolume) {
-        ytPlayer.setVolume(val);
-      }
+    //Updated set volume that changes slider
+  function setVolume(val) {
+  val = parseInt(val);
+  
+  if (ytPlayer && ytPlayer.setVolume) {
+    ytPlayer.setVolume(val);
+  }
+  
+  // If user drags while muted, remember new value
+  if (isAudioMuted) {
+    if (val > 0) {
+      lastVolume = val; // store last value
     }
+  } else {
+    lastVolume = val;
+  }
+}
+
 
     function playNextOrRandom() {
       const activeList = getCurrentPlaylist();
