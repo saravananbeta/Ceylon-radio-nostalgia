@@ -70,7 +70,7 @@ fetch('data.json')
         events: {
           'onReady': function(event) {
             event.target.mute();
-            event.target.setVolume(70);
+			event.target.setVolume(lastVolume);  
             updateMuteUI();
             updateUI();
           },
@@ -319,7 +319,7 @@ document.getElementById('muteBtn').addEventListener('click', function() {
     initialLoad = false;
     event.target.pauseVideo();
     event.target.unMute();
-    event.target.setVolume(70);
+    event.target.setVolume(lastVolume); 
     isAudioMuted = false;
     btn.classList.remove('playing');
     updateMuteUI();
