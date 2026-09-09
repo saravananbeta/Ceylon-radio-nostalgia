@@ -70,7 +70,7 @@ fetch('data.json')
         events: {
           'onReady': function(event) {
             event.target.mute();
-            event.target.setVolume(50);
+            event.target.setVolume(70);
             updateMuteUI();
             updateUI();
           },
@@ -105,7 +105,7 @@ fetch('data.json')
               ytPlayer.mute();
             } else {
               ytPlayer.unMute();
-              ytPlayer.setVolume(100);
+              ytPlayer.setVolume(70);
             }
           }
           updateMuteUI();
@@ -314,7 +314,7 @@ fetch('data.json')
     initialLoad = false;
     event.target.pauseVideo();
     event.target.unMute();
-    event.target.setVolume(100);
+    event.target.setVolume(70);
     isAudioMuted = false;
     btn.classList.remove('playing');
     updateMuteUI();
