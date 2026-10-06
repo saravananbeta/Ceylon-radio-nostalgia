@@ -10,7 +10,7 @@
       "kcAOmmuT4es", "zKpvatGl9So", "nN78Gnnu8Qo", "VhKz3PF9iw4", "9QKSaElfwQM",  "8zfLuYqQlqs", "jS_7UMAXO18", "nnCVegbJBn0",
       "lyKDKp6kvlU", "5a3uZAkGd-g", "1dv4yrPDid0", "_6q5zKNSCps", "DdWVWs7YAY4", "xo4DZegO1oc",  "nJ_NG2MnhDs", "zwW1vK2qokQ",
       "6Kedr7MMfac", "glnhCgL2s8A", "f7UFnAEb-H0", "4hu18JxJpnw", "QRgPtSe4zQU", "01PrW3U8RUo",  "qj62z1Abn_s", "q7W480PO4JA",
-      "iQ6ouZcIUBE", "5NXhNIDPRBw", "JtmZQS-IUyw", "AZHaUExsVd4", "erJ_bMgEA7c"
+      "iQ6ouZcIUBE", "5NXhNIDPRBw", "erJ_bMgEA7c"
     ];  
 
     const originalPlaylist2 = [
@@ -22,7 +22,7 @@
       "qkmjQtvrHbs", "5gjmeNLDnWE", "KMVSNHl03UY", "5uafA1pAWow", "oFY6TsrnVpg", "knc2mBi6J8E", "om3c_RK3-zI", "FE3gymzvpQI",
       "Th-9495kgew", "qZKc2z4k0v4", "agGKSCj8hOY", "1sPCgElDxbY", "BueLii2m8e8", "oC4ndv87Whk", "THnIF0rNXNY", "TeYTRiVUGBE", 
       "lmhUAqYJtxc", "yM6WXTyJRrk", "q9YcaJMo9ZY", "Qm6WA6ba8dw", "lQosvjFn6yk", "q7Uem7g8frU", "cttXyYE7Azk", "A8ZunYldumc",
-      "AfHM_2xNt3I", "XQuoA2plJe0", "YADmnOE6CaA", "cfIDt1SCsac", "V7365ujASXc", "8mqCAZXjVuM"
+      "AfHM_2xNt3I", "XQuoA2plJe0", "YADmnOE6CaA", "cfIDt1SCsac", "V7365ujASXc", "8mqCAZXjVuM", "JtmZQS-IUyw", "AZHaUExsVd4"
     ];
 
   const originalPlaylist3 = [
